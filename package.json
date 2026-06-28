@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "mongodb-uri": "^0.9.7",
+    "path": "^0.12.7"
+  }
+}
