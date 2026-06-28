@@ -1,1 +1,64 @@
 @import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #fafbfd;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+  }
+}
+
+.premium-card {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.7);
+  box-shadow: 
+    0 15px 35px -10px rgba(0, 0, 0, 0.03), 
+    0 5px 15px -5px rgba(0, 0, 0, 0.02),
+    0 0 0 1px rgba(0, 0, 0, 0.005);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.premium-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(37, 99, 235, 0.15);
+  box-shadow: 
+    0 25px 45px -12px rgba(37, 99, 235, 0.06), 
+    0 10px 20px -8px rgba(37, 99, 235, 0.03),
+    0 0 0 1px rgba(37, 99, 235, 0.02);
+}
+
+.premium-input {
+  background-color: rgba(248, 250, 252, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-input:hover {
+  border-color: rgba(203, 213, 225, 0.8);
+}
+
+.premium-input:focus {
+  background-color: #ffffff;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+}
+
+@keyframes float-blob {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(40px, -60px) scale(1.08); }
+  66% { transform: translate(-30px, 30px) scale(0.96); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+.animate-float-blob {
+  animation: float-blob 22s infinite ease-in-out;
+}
+
+.animate-float-blob-delayed {
+  animation: float-blob 28s infinite ease-in-out 3s;
+}

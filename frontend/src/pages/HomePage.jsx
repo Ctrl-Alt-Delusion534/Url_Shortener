@@ -42,39 +42,41 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-[#f3f4f6] px-4 py-16 text-slate-900 flex items-center justify-center font-sans">
-      <div className="w-full max-w-[480px] rounded-lg border border-[#e2e8f0] bg-white p-8 shadow-sm sm:p-10">
+    <div className="min-h-[calc(100vh-4rem)] px-4 py-20 flex items-center justify-center">
+      <div className="w-full max-w-[460px] rounded-2xl p-8 sm:p-10 premium-card">
         <div className="text-center">
-          <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-lg bg-[#2563eb] text-white font-bold shadow-sm">
-            <span>⚡</span>
+          <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-500/20">
+            <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="currentColor"/>
+            </svg>
           </div>
-          <h1 className="mt-5 text-2xl font-bold tracking-tight text-slate-900 font-sans">
+          <h1 className="mt-5 text-2xl font-semibold tracking-tight text-slate-900 font-sans">
             Shorten your link
           </h1>
-          <p className="mx-auto mt-2 max-w-sm text-sm text-slate-500">
-            Create clean, fast-redirecting short links in seconds.
+          <p className="mx-auto mt-2 max-w-sm text-sm text-slate-500 leading-relaxed">
+            Create clean, fast-redirecting custom short links in seconds.
           </p>
         </div>
 
         {authLoading ? (
           <div className="flex h-40 items-center justify-center mt-8">
-            <span className="flex h-6 w-6 animate-spin rounded-full border-2 border-[#2563eb] border-t-transparent"></span>
+            <span className="flex h-6 w-6 animate-spin rounded-full border-2 border-blue-600 border-t-transparent"></span>
           </div>
         ) : !user ? (
-          <div className="mt-8 text-center p-6 border border-slate-200 rounded-lg bg-slate-50/50">
-            <p className="text-sm text-slate-500">
+          <div className="mt-8 text-center p-6 border border-slate-200/60 rounded-xl bg-slate-50/50">
+            <p className="text-sm font-medium text-slate-500">
               You must be signed in to shorten URLs.
             </p>
             <div className="mt-6 flex flex-col gap-3">
               <button
                 onClick={() => navigate({ to: "/login" })}
-                className="w-full rounded-lg bg-[#2563eb] py-2 text-sm font-semibold text-white hover:bg-[#1d4ed8] transition cursor-pointer"
+                className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 py-2.5 text-sm font-semibold text-white shadow hover:brightness-105 active:scale-95 transition-all duration-205 cursor-pointer"
               >
                 Sign In
               </button>
               <button
                 onClick={() => navigate({ to: "/register" })}
-                className="w-full rounded-lg bg-slate-50 border border-slate-200 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition cursor-pointer"
+                className="w-full rounded-xl bg-white border border-slate-200 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-900 active:scale-95 transition-all duration-205 cursor-pointer"
               >
                 Create an Account
               </button>
@@ -96,15 +98,16 @@ const HomePage = () => {
             </div>
 
             {mutation.isSuccess && (
-              <div className="mt-6 rounded-lg border border-[#e2e8f0] bg-slate-50 p-4">
-                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+              <div className="mt-6 rounded-xl border border-slate-200/80 bg-slate-50/50 p-4 relative overflow-hidden">
+                <div className="absolute top-0 left-0 h-full w-1 bg-emerald-500"></div>
+                <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
                   Short Link Generated
                 </p>
                 <a
                   href={mutation.data}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-2 block break-all text-sm font-semibold text-[#2563eb] hover:text-[#1d4ed8] transition-colors"
+                  className="mt-2 block break-all text-sm font-medium text-blue-600 hover:text-blue-700 hover:underline transition-all"
                 >
                   {mutation.data}
                 </a>

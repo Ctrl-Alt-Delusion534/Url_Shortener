@@ -32,54 +32,57 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-[#f3f4f6] px-4 py-20 text-slate-900 flex items-center justify-center font-sans">
-      <div className="w-full max-w-[420px] rounded-lg border border-[#e2e8f0] bg-white p-8 shadow-sm sm:p-10">
+    <div className="min-h-[calc(100vh-4rem)] px-4 py-20 flex items-center justify-center">
+      <div className="w-full max-w-[400px] rounded-2xl p-8 sm:p-10 premium-card">
         <div className="text-center">
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 font-sans">
-            Login
+          <h1 className="text-2xl font-semibold tracking-tight text-slate-900 font-sans">
+            Sign In
           </h1>
+          <p className="mt-2 text-sm text-slate-500">
+            Welcome back! Please enter your details.
+          </p>
         </div>
 
         {error && (
-          <div className="mt-6 rounded-lg border border-red-200 bg-red-50 p-3 text-xs text-red-600 text-center">
+          <div className="mt-6 rounded-xl border border-red-200 bg-red-50 p-3 text-xs text-red-600 text-center font-semibold">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+        <form onSubmit={handleSubmit} className="mt-8 space-y-5" noValidate>
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-700">
-              Email
+            <label className="text-xs font-semibold text-slate-600">
+              Email Address
             </label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="anmol.kamath@example.com"
-              className="w-full rounded-lg border border-[#cbd5e1] bg-white px-4 py-2 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100"
+              className="w-full rounded-xl border bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 outline-none premium-input"
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-700">
+            <label className="text-xs font-semibold text-slate-600">
               Password
             </label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••••"
-              className="w-full rounded-lg border border-[#cbd5e1] bg-white px-4 py-2 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100"
+              placeholder="••••••••"
+              className="w-full rounded-xl border bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 outline-none premium-input"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-lg bg-[#2563eb] py-2 text-sm font-semibold text-white shadow hover:bg-[#1d4ed8] transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center cursor-pointer"
+            className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/10 hover:shadow-lg hover:shadow-blue-500/15 hover:brightness-105 active:scale-[0.98] transition-all duration-200 flex items-center justify-center cursor-pointer disabled:opacity-50"
           >
             {loading ? (
-              <span className="flex h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
+              <span className="flex h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
             ) : (
               "Sign In"
             )}
@@ -88,8 +91,8 @@ const LoginPage = () => {
 
         <p className="mt-6 text-center text-xs text-slate-500">
           Don't have an account?{" "}
-          <Link to="/register" className="font-semibold text-[#2563eb] hover:text-[#1d4ed8] hover:underline transition-colors">
-            Register
+          <Link to="/register" className="font-semibold text-blue-600 hover:text-blue-700 hover:underline transition-colors">
+            Sign Up
           </Link>
         </p>
       </div>

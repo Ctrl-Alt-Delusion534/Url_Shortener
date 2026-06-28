@@ -9,9 +9,9 @@ const UrlForm = ({
   error,
 }) => {
   return (
-    <form className="w-full space-y-4" onSubmit={handleSubmit} noValidate>
+    <form className="w-full space-y-5" onSubmit={handleSubmit} noValidate>
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="long-url" className="text-xs font-bold text-slate-700">
+        <label htmlFor="long-url" className="text-xs font-semibold text-slate-700 tracking-wide uppercase">
           Destination URL
         </label>
         <input
@@ -26,12 +26,12 @@ const UrlForm = ({
           disabled={isPending}
           aria-invalid={Boolean(error)}
           aria-describedby={error ? "url-error" : undefined}
-          className="w-full rounded-lg border border-[#cbd5e1] bg-white px-4 py-2 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb]"
+          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 outline-none premium-input"
         />
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="slug" className="text-xs font-bold text-slate-700">
+        <label htmlFor="slug" className="text-xs font-semibold text-slate-700 tracking-wide uppercase">
           Custom Alias / Slug (Optional)
         </label>
         <input
@@ -42,29 +42,32 @@ const UrlForm = ({
           type="text"
           placeholder="e.g. my-slug"
           disabled={isPending}
-          className="w-full rounded-lg border border-[#cbd5e1] bg-white px-4 py-2 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb]"
+          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 outline-none premium-input"
         />
       </div>
 
       <button
         type="submit"
         disabled={isPending}
-        className="w-full rounded-lg bg-[#2563eb] px-4 py-2 text-sm font-semibold text-white shadow hover:bg-[#1d4ed8] transition disabled:opacity-50 disabled:cursor-not-allowed duration-200 mt-2 cursor-pointer"
+        className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/10 hover:shadow-lg hover:shadow-blue-500/15 hover:brightness-105 active:scale-[0.98] transition-all duration-200 mt-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isPending ? "Shortening..." : "Shorten URL"}
       </button>
 
       <div aria-live="polite">
         {isPending && (
-          <p className="mt-3 text-xs text-slate-500">Shortening your link...</p>
+          <div className="mt-4 flex items-center justify-center gap-2 text-xs text-slate-500">
+            <span className="flex h-3 w-3 animate-spin rounded-full border border-slate-400 border-t-transparent"></span>
+            <span>Generating your secure link...</span>
+          </div>
         )}
         {isSuccess && (
-          <p className="mt-3 text-xs text-[#2563eb] font-semibold">
+          <p className="mt-4 text-center text-xs text-emerald-600 font-semibold bg-emerald-50 border border-emerald-100 py-2 rounded-lg">
             Short URL created successfully!
           </p>
         )}
         {error && (
-          <p id="url-error" className="mt-3 text-xs text-red-500 font-semibold" role="alert">
+          <p id="url-error" className="mt-4 text-center text-xs text-red-600 font-semibold bg-red-50 border border-red-100 py-2 rounded-lg" role="alert">
             {error.message || "Something went wrong."}
           </p>
         )}

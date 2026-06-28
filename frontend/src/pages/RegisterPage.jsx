@@ -79,23 +79,26 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-[#f3f4f6] px-4 py-16 text-slate-900 flex items-center justify-center font-sans">
-      <div className="w-full max-w-[420px] rounded-lg border border-[#e2e8f0] bg-white p-8 shadow-sm sm:p-10">
+    <div className="min-h-[calc(100vh-4rem)] px-4 py-20 flex items-center justify-center">
+      <div className="w-full max-w-[400px] rounded-2xl p-8 sm:p-10 premium-card">
         <div className="text-center">
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 font-sans">
-            Register
+          <h1 className="text-2xl font-semibold tracking-tight text-slate-900 font-sans">
+            Create Account
           </h1>
+          <p className="mt-2 text-sm text-slate-500">
+            Sign up to track snapsurl analytics.
+          </p>
         </div>
 
         {error && (
-          <div className="mt-6 rounded-lg border border-red-200 bg-red-50 p-3 text-xs text-red-600 text-center">
+          <div className="mt-6 rounded-xl border border-red-200 bg-red-50 p-3 text-xs text-red-600 text-center font-semibold">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+        <form onSubmit={handleSubmit} className="mt-6 space-y-4" noValidate>
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-700">
+            <label className="text-xs font-semibold text-slate-600">
               Full Name
             </label>
             <input
@@ -103,12 +106,12 @@ const RegisterPage = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Anmol Kamath"
-              className="w-full rounded-lg border border-[#cbd5e1] bg-white px-4 py-2 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100"
+              className="w-full rounded-xl border bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 outline-none premium-input"
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-700">
+            <label className="text-xs font-semibold text-slate-600">
               Email Address
             </label>
             <input
@@ -116,10 +119,10 @@ const RegisterPage = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="anmol.kamath@example.com"
-              className={`w-full rounded-lg border bg-white px-4 py-2 text-sm text-slate-900 placeholder-slate-400 outline-none transition ${
+              className={`w-full rounded-xl border bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 outline-none premium-input ${
                 emailTaken 
-                  ? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-100" 
-                  : "border-[#cbd5e1] focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100"
+                  ? "border-red-500 focus:border-red-500 focus:ring-red-100" 
+                  : "border-slate-200"
               }`}
             />
             {emailTaken && (
@@ -130,7 +133,7 @@ const RegisterPage = () => {
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-700">
+            <label className="text-xs font-semibold text-slate-600">
               Password
             </label>
             <input
@@ -138,40 +141,40 @@ const RegisterPage = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full rounded-lg border border-[#cbd5e1] bg-white px-4 py-2 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100"
+              className="w-full rounded-xl border bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 outline-none premium-input"
             />
             {password.length > 0 && (
-              <div className="mt-2 p-3 bg-slate-50 border border-slate-100 rounded-lg text-xs space-y-1">
-                <p className="font-semibold text-slate-500 mb-1.5">Password requirements:</p>
-                <div className="flex items-center gap-1.5">
-                  <span className={rules.length ? "text-emerald-600" : "text-slate-400"}>
+              <div className="mt-2.5 p-3 bg-slate-50 border border-slate-100 rounded-xl text-xs space-y-1.5">
+                <p className="font-semibold text-slate-500 mb-1">Password requirements:</p>
+                <div className="flex items-center gap-2">
+                  <span className={rules.length ? "text-emerald-600 font-semibold" : "text-slate-300"}>
                     {rules.length ? "✓" : "○"}
                   </span>
-                  <span className={rules.length ? "text-emerald-700" : "text-slate-500"}>
+                  <span className={rules.length ? "text-emerald-700 font-medium" : "text-slate-500"}>
                     At least 8 characters
                   </span>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <span className={rules.uppercase ? "text-emerald-600" : "text-slate-400"}>
+                <div className="flex items-center gap-2">
+                  <span className={rules.uppercase ? "text-emerald-600 font-semibold" : "text-slate-300"}>
                     {rules.uppercase ? "✓" : "○"}
                   </span>
-                  <span className={rules.uppercase ? "text-emerald-700" : "text-slate-500"}>
+                  <span className={rules.uppercase ? "text-emerald-700 font-medium" : "text-slate-500"}>
                     At least 1 uppercase letter
                   </span>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <span className={rules.number ? "text-emerald-600" : "text-slate-400"}>
+                <div className="flex items-center gap-2">
+                  <span className={rules.number ? "text-emerald-600 font-semibold" : "text-slate-300"}>
                     {rules.number ? "✓" : "○"}
                   </span>
-                  <span className={rules.number ? "text-emerald-700" : "text-slate-500"}>
+                  <span className={rules.number ? "text-emerald-700 font-medium" : "text-slate-500"}>
                     At least 1 number
                   </span>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <span className={rules.special ? "text-emerald-600" : "text-slate-400"}>
+                <div className="flex items-center gap-2">
+                  <span className={rules.special ? "text-emerald-600 font-semibold" : "text-slate-300"}>
                     {rules.special ? "✓" : "○"}
                   </span>
-                  <span className={rules.special ? "text-emerald-700" : "text-slate-500"}>
+                  <span className={rules.special ? "text-emerald-700 font-medium" : "text-slate-500"}>
                     At least 1 special character
                   </span>
                 </div>
@@ -180,7 +183,7 @@ const RegisterPage = () => {
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-700">
+            <label className="text-xs font-semibold text-slate-600">
               Confirm Password
             </label>
             <input
@@ -188,17 +191,17 @@ const RegisterPage = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full rounded-lg border border-[#cbd5e1] bg-white px-4 py-2 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-[#2563eb] focus:ring-2 focus:ring-blue-100"
+              className="w-full rounded-xl border bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 outline-none premium-input"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-lg bg-[#2563eb] py-2.5 text-sm font-semibold text-white shadow hover:bg-[#1d4ed8] transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center cursor-pointer"
+            className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/10 hover:shadow-lg hover:shadow-blue-500/15 hover:brightness-105 active:scale-[0.98] transition-all duration-200 flex items-center justify-center cursor-pointer disabled:opacity-50"
           >
             {loading ? (
-              <span className="flex h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
+              <span className="flex h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
             ) : (
               "Create Account"
             )}
@@ -207,7 +210,7 @@ const RegisterPage = () => {
 
         <p className="mt-6 text-center text-xs text-slate-500">
           Already have an account?{" "}
-          <Link to="/login" className="font-semibold text-[#2563eb] hover:text-[#1d4ed8] hover:underline transition-colors">
+          <Link to="/login" className="font-semibold text-blue-600 hover:text-blue-700 hover:underline transition-colors">
             Sign In
           </Link>
         </p>

@@ -1,16 +1,51 @@
-import {generateNanoId} from "../utils/helper.js";
+import { generateNanoId } from "../utils/helper.js";
+import { saveShortUrl } from "../dao/short-uri.js";
 import shorturl from "../models/shorturl.model.js";
-import {saveShortUrl} from "../dao/short-uri.js";
-export const createShortUrlServiceWithoutUser=async (url)=>{const shortUrl=generateNanoId(7);
-if(!shortUrl){
-    throw new Error("Failed to generate short URL");
-}
-await saveShortUrl(shortUrl,url);
-  return shortUrl;
- }
 
- export const createShortUrlServiceWithUser = async (url, userId) => {
-   const shortUrl = generateNanoId(7);
-   await saveShortUrl(shortUrl, url,userId);
-   return shortUrl;
- };
+export const createShortUrlServiceWithoutUser = async (url, slug) => {
+  try {
+    const parsed = new URL(url);
+    if (!["http:", "https:"].includes(parsed.protocol)) {
+      throw new Error();
+    }
+  } catch {
+    throw new Error("Invalid destination URL. Must be a valid HTTP or HTTPS address.");
+  }
+
+  let shortUrl = slug ? slug.trim() : "";
+  if (shortUrl) {
+    const existing = await shorturl.findOne({ short_url: shortUrl });
+    if (existing) {
+      throw new Error("This custom alias is already taken.");
+    }
+  } else {
+    shortUrl = generateNanoId(7);
+  }
+
+  await saveShortUrl(shortUrl, url);
+  return shortUrl;
+};
+
+export const createShortUrlServiceWithUser = async (url, userId, slug) => {
+  try {
+    const parsed = new URL(url);
+    if (!["http:", "https:"].includes(parsed.protocol)) {
+      throw new Error();
+    }
+  } catch {
+    throw new Error("Invalid destination URL. Must be a valid HTTP or HTTPS address.");
+  }
+
+  let shortUrl = slug ? slug.trim() : "";
+  if (shortUrl) {
+    const existing = await shorturl.findOne({ short_url: shortUrl });
+    if (existing) {
+      throw new Error("This custom alias is already taken.");
+    }
+  } else {
+    shortUrl = generateNanoId(7);
+  }
+
+  await saveShortUrl(shortUrl, url, userId);
+  return shortUrl;
+};

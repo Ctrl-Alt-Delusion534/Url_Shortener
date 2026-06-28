@@ -1,32 +1,41 @@
-import { generateNanoId } from "../utils/helper.js";
-import { createShortUrlServiceWithoutUser } from "../services/short-url.service.js";
-import { createShortUrlServiceWithUser } from "../services/short-url.service.js";
-import { findUrlFromShortUrl } from "../dao/short-uri.js";
-export const createShortUrl = async (req, res,next) => {
-  try{
-    const { url } = req.body;
-  const shortUrl = await createShortUrlServiceWithoutUser(url);
-  res.send(process.env.APP_URL + shortUrl);
-  }
-  catch(err){
+import { createShortUrlServiceWithoutUser, createShortUrlServiceWithUser } from "../services/short-url.service.js";
+import { findUrlFromShortUrl, findUrlsByUserId } from "../dao/short-uri.js";
+
+export const createShortUrl = async (req, res, next) => {
+  try {
+    const { url, slug } = req.body;
+    const userId = req.user?._id;
+    let shortUrl;
+    if (userId) {
+      shortUrl = await createShortUrlServiceWithUser(url, userId, slug);
+    } else {
+      shortUrl = await createShortUrlServiceWithoutUser(url, slug);
+    }
+    res.status(200).send(`${process.env.APP_URL}${shortUrl}`);
+  } catch (err) {
     next(err);
   }
 };
-export const redirectfromShortUrl = async (req, res) => {
-    try{
-  const { id } = req.params;
-  const url = await findUrlFromShortUrl(id);
-  if (!url) {
-    throw new Error("Short URL not found");
-  }
-  res.redirect(url.full_url);
-}catch(err){
+
+export const redirectfromShortUrl = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const url = await findUrlFromShortUrl(id);
+    if (!url) {
+      return res.status(404).send("Short URL not found");
+    }
+    res.redirect(url.full_url);
+  } catch (err) {
     next(err);
-}
+  }
 };
-export const createCustomShortUrl= async(res,req)=>{
-  const {url,customUrl}=req.body
-  const shortUrl=await createShortUrlServiceWithoutUser(url,customUrl);
-  res.status
-}
-//can do many const exports but only one default export
+
+export const getMyUrlsController = async (req, res, next) => {
+  try {
+    const userId = req.user?._id;
+    const urls = await findUrlsByUserId(userId);
+    res.status(200).json({ urls });
+  } catch (err) {
+    next(err);
+  }
+};

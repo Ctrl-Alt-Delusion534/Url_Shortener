@@ -54,3 +54,4 @@ const startServer = async () => {
 };
 
 startServer();
+
