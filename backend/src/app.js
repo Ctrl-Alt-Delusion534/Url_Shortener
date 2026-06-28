@@ -13,7 +13,26 @@ import shortUrlRoutes from "./routes/short-url.routes.js";
 import { redirectfromShortUrl } from "./controller/short-url.controller.js";
 import errorHandler from "./utils/errorHandler.js";
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      const allowedOrigin = process.env.APP_URL
+        ? process.env.APP_URL.replace(/\/$/, "")
+        : "";
+      if (
+        !origin ||
+        origin.startsWith("http://localhost:") ||
+        origin.startsWith("http://127.0.0.1:") ||
+        origin === allowedOrigin
+      ) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  }),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
