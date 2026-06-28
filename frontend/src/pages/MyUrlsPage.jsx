@@ -23,7 +23,7 @@ const MyUrlsPage = () => {
   const handleCopy = async (id, shortUrl) => {
     const backendBaseUrl = window.location.origin.includes("localhost")
       ? "http://localhost:3000"
-      : window.location.origin;
+      : "https://url-shortener-sstj.onrender.com";
     const fullShortUrl = backendBaseUrl + "/" + shortUrl;
     try {
       await navigator.clipboard.writeText(fullShortUrl);
@@ -108,7 +108,12 @@ const MyUrlsPage = () => {
                 </thead>
                 <tbody className="divide-y divide-[#e2e8f0] text-sm text-slate-700">
                   {urls.map((url) => {
-                    const fullShortUrl = (window.location.origin.includes("localhost") ? "http://localhost:3000" : window.location.origin) + "/" + url.short_url;
+                    const fullShortUrl =
+                      (window.location.origin.includes("localhost")
+                        ? "http://localhost:3000"
+                        : "https://url-shortener-sstj.onrender.com") +
+                      "/" +
+                      url.short_url;
                     return (
                       <tr key={url._id} className="hover:bg-slate-50/50 transition-colors">
                         <td className="py-3.5 px-6 max-w-xs truncate text-slate-600">

@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://url-shortener-sstj.onrender.com/api/:path*"
+    }
+  ]
+}
