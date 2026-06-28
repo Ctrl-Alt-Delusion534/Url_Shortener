@@ -11,7 +11,10 @@ export const createShortUrl = async (req, res, next) => {
     } else {
       shortUrl = await createShortUrlServiceWithoutUser(url, slug);
     }
-    res.status(200).send(`${process.env.APP_URL}${shortUrl}`);
+    const domain = process.env.NODE_ENV === "production"
+      ? "https://url-shortener-2ufk.onrender.com/"
+      : "http://localhost:3000/";
+    res.status(200).send(`${domain}${shortUrl}`);
   } catch (err) {
     next(err);
   }
