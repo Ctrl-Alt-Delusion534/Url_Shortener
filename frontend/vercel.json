@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://url-shortener-sstj.onrender.com/api/:path*"
+      "destination": "https://url-shortener-2ufk.onrender.com/api/:path*"
     },
     {
       "source": "/((?!api).*)$",

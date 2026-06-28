@@ -23,7 +23,7 @@ const MyUrlsPage = () => {
   const handleCopy = async (id, shortUrl) => {
     const backendBaseUrl = window.location.origin.includes("localhost")
       ? "http://localhost:3000"
-      : "https://url-shortener-sstj.onrender.com";
+      : "https://url-shortener-2ufk.onrender.com";
     const fullShortUrl = backendBaseUrl + "/" + shortUrl;
     try {
       await navigator.clipboard.writeText(fullShortUrl);
@@ -112,7 +112,7 @@ const MyUrlsPage = () => {
                     const fullShortUrl =
                       (window.location.origin.includes("localhost")
                         ? "http://localhost:3000"
-                        : "https://url-shortener-sstj.onrender.com") +
+                        : "https://url-shortener-2ufk.onrender.com") +
                       "/" +
                       url.short_url;
                     return (
