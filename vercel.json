@@ -1,0 +1,13 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://url-shortener-sstj.onrender.com/api/:path*"
+    },
+    {
+      "source": "/((?!api).*)$",
+      "destination": "/index.html"
+    }
+  ]
+}
