@@ -12,6 +12,7 @@ import authRoutes from "./routes/auth.routes.js";
 import shortUrlRoutes from "./routes/short-url.routes.js";
 import { redirectfromShortUrl } from "./controller/short-url.controller.js";
 import errorHandler from "./utils/errorHandler.js";
+import { connectRedis } from "./config/redis.js";
 const app = express();
 app.use(
   cors({
@@ -45,6 +46,8 @@ app.use(errorHandler);
 const startServer = async () => {
   try {
     await connectDB();
+    await connectRedis();
+    
     app.listen(3000, () => {
       console.log("Server is running on port http://localhost:3000");
     });

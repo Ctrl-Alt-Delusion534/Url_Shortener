@@ -19,12 +19,24 @@ export const saveShortUrl = async (shortUrl, longurl, userId) => {
 };
 
 export const findUrlFromShortUrl = async (shortUrl) => {
-  return await shorturl.findOneAndUpdate(
-    { short_url: shortUrl },
-    { $inc: { clicks: 1 } }
+  return await shorturl.findOne(
+    { short_url: shortUrl }
   );
 };
 
+
+export const incrementClicksAsync = (shortUrl) => {
+  setImmediate(async () => {
+    try {
+      await shorturl.updateOne(
+        { short_url: shortUrl },
+        { $inc: { clicks: 1 } },
+      );
+    } catch (err) {
+      console.error("Click Increment Failed", err);
+    }
+  });
+};
 export const findUrlsByUserId = async (userId) => {
   return await shorturl.find({ user: userId });
 };
