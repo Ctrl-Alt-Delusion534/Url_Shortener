@@ -86,7 +86,7 @@ const RegisterPage = () => {
             Create Account
           </h1>
           <p className="mt-2 text-sm text-slate-500">
-            Sign up to track snapsurl analytics.
+            Sign up to track link performance and analytics.
           </p>
         </div>
 

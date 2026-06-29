@@ -19,6 +19,9 @@ export const fetchWithAuth = async (url, options = {}) => {
     if (refreshResponse.ok) {
       response = await fetch(url, defaultOptions);
     } else {
+      if (!url.includes("/api/auth/me")) {
+        window.location.href = "/login?expired=true";
+      }
       throw new Error("Session expired. Please log in again.");
     }
   }

@@ -45,7 +45,7 @@ const MyUrlsPage = () => {
               Dashboard
             </h1>
             <p className="mt-1 text-sm text-slate-500">
-              Manage and track performance analytics of your shortened links.
+              Track and manage your shortened links.
             </p>
           </div>
           <button

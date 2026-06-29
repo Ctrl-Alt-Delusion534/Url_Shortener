@@ -9,4 +9,3 @@ dist/
 **/.env*
 
 *.log
-.vscode/

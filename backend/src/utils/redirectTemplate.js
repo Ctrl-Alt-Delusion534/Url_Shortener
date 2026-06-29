@@ -71,38 +71,18 @@ export const getRedirectTemplate = (destinationUrl) => {
           transform: translateY(-1px);
           box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.15);
         }
-        .countdown {
-          font-size: 12px;
-          color: #94a3b8;
-          margin-top: 16px;
-        }
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(10px); }
           to { opacity: 1; transform: translateY(0); }
         }
       </style>
-      <script>
-        let seconds = 2;
-        function startCountdown() {
-          const timer = setInterval(() => {
-            seconds--;
-            document.getElementById("timer").textContent = seconds;
-            if (seconds <= 0) {
-              clearInterval(timer);
-              window.location.href = "${destinationUrl}";
-            }
-          }, 1000);
-        }
-        window.onload = startCountdown;
-      </script>
     </head>
     <body>
       <div class="card">
         <h1>Leaving SnapUrl</h1>
         <p>You are being redirected to an external link. Please verify the destination domain is safe before proceeding.</p>
         <div class="url-box">${destinationUrl}</div>
-        <a href="${destinationUrl}" class="btn">Proceed Immediately</a>
-        <div class="countdown">Redirecting automatically in <span id="timer">2</span> seconds...</div>
+        <a href="${destinationUrl}" class="btn">Proceed to Link</a>
       </div>
     </body>
     </html>

@@ -1,5 +1,6 @@
 import { redisClient } from "../config/redis.js";
 import { calculateRateLimitMetrics } from "../utils/helper.js";
+import { incrementRateLimitBlocks } from "../utils/metrics.js";
 
 export const rateLimiter = ({
   windowMs = 60000,
@@ -47,6 +48,7 @@ export const rateLimiter = ({
 
       if (activeRequestCount >= maxRequests) {
         res.setHeader("Retry-After", retryAfterSeconds);
+        incrementRateLimitBlocks();
         return res.status(429).json({
           message: `Too many requests. Please try again after ${retryAfterSeconds} seconds.`,
         });

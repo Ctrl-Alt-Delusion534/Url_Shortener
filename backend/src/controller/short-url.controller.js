@@ -2,6 +2,7 @@ import { createShortUrlServiceWithoutUser, createShortUrlServiceWithUser } from 
 import { findUrlFromShortUrl, findUrlsByUserId, incrementClicksAsync } from "../dao/short-uri.js";
 import { redisClient } from "../config/redis.js";
 import { getRedirectTemplate } from "../utils/redirectTemplate.js";
+import { incrementCacheHits, incrementCacheMisses } from "../utils/metrics.js";
 
 export const createShortUrl = async (req, res, next) => {
   try {
@@ -35,6 +36,9 @@ export const redirectfromShortUrl = async (req, res, next) => {
       }
       destinationUrl = url.full_url;
       await redisClient.set(cacheKey, destinationUrl, { EX: 86400 });
+      incrementCacheMisses();
+    } else {
+      incrementCacheHits();
     }
 
     incrementClicksAsync(id);

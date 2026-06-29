@@ -13,6 +13,7 @@ import shortUrlRoutes from "./routes/short-url.routes.js";
 import { redirectfromShortUrl } from "./controller/short-url.controller.js";
 import errorHandler from "./utils/errorHandler.js";
 import { connectRedis } from "./config/redis.js";
+import { getPrometheusMetrics } from "./utils/metrics.js";
 const app = express();
 app.use(
   cors({
@@ -39,6 +40,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use("/api/auth",authRoutes);
 app.use("/api/create",shortUrlRoutes);
+app.get("/metrics", (req, res) => {
+  res.set("Content-Type", "text/plain; version=0.0.4; charset=utf-8");
+  res.send(getPrometheusMetrics());
+});
 app.get("/:id",redirectfromShortUrl);
 
 app.use(errorHandler);

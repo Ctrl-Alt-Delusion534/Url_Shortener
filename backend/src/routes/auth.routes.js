@@ -3,7 +3,8 @@ import {
   registerUser, 
   LoginUser, 
   logoutUser, 
-  checkEmailExists
+  checkEmailExists,
+  refreshSession
 } from "../controller/auth.controller.js";
 import { authMiddleware } from "../authMiddleware/auth.middleware.js";
 import { rateLimiter } from "../authMiddleware/ratelimiter.middleware.js";
@@ -18,6 +19,7 @@ const authRateLimit = rateLimiter({
 router.post("/register", registerUser);
 router.post("/login", LoginUser);
 router.post("/logout", logoutUser);
+router.post("/refresh", refreshSession);
 router.get("/check-email", checkEmailExists);
 router.get("/me", authMiddleware, (req, res) => {
   res.status(200).json({ user: req.user });

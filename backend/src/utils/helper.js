@@ -1,15 +1,28 @@
-import { nanoid } from "nanoid";
 import jsonwebtoken from "jsonwebtoken";
+import { nanoid } from "nanoid";
+
 export const generateNanoId = (length) => {
   return nanoid(length);
 };
+
 export const signToken = (payload) => {
   return jsonwebtoken.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: "5m",
+    expiresIn: "10m",
   });
 };
+
 export const verifyToken = (token) => {
   return jsonwebtoken.verify(token, process.env.JWT_SECRET);
+};
+
+export const signRefreshToken = (payload) => {
+  return jsonwebtoken.sign(payload, process.env.REFRESH_SECRET, {
+    expiresIn: "7d",
+  });
+};
+
+export const verifyRefreshToken = (token) => {
+  return jsonwebtoken.verify(token, process.env.REFRESH_SECRET);
 };
 
 export const calculateRateLimitMetrics = (
@@ -27,4 +40,4 @@ export const calculateRateLimitMetrics = (
     (oldestRequestTimestamp + windowMs - currentTimestamp) / 1000,
   );
   return { remainingRequests, rateLimitResetSeconds, retryAfterSeconds };
-};
+};
