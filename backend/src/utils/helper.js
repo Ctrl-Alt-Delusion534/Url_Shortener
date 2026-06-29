@@ -27,4 +27,4 @@ export const calculateRateLimitMetrics = (
     (oldestRequestTimestamp + windowMs - currentTimestamp) / 1000,
   );
   return { remainingRequests, rateLimitResetSeconds, retryAfterSeconds };
-};
+};

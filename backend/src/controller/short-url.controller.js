@@ -1,7 +1,7 @@
 import { createShortUrlServiceWithoutUser, createShortUrlServiceWithUser } from "../services/short-url.service.js";
 import { findUrlFromShortUrl, findUrlsByUserId, incrementClicksAsync } from "../dao/short-uri.js";
 import { redisClient } from "../config/redis.js";
-import { rateLimiter } from "../authMiddleware/ratelimiter.middleware.js";
+import { getRedirectTemplate } from "../utils/redirectTemplate.js";
 
 export const createShortUrl = async (req, res, next) => {
   try {
@@ -26,20 +26,19 @@ export const redirectfromShortUrl = async (req, res, next) => {
   try {
     const { id } = req.params;
     const cacheKey = `url:cache:${id}`;
-    const cachedLongUrl=await redisClient.get(cacheKey);
-    if(cachedLongUrl){
-      incrementClicksAsync(id);
-      //I used setImmediate so that 
-      //user will redirect instantly while the click will update asynchronously
-      return res.redirect(cachedLongUrl);
+    let destinationUrl = await redisClient.get(cacheKey);
+
+    if (!destinationUrl) {
+      const url = await findUrlFromShortUrl(id);
+      if (!url) {
+        return res.status(404).send("Short URL not found");
+      }
+      destinationUrl = url.full_url;
+      await redisClient.set(cacheKey, destinationUrl, { EX: 86400 });
     }
-    const url = await findUrlFromShortUrl(id);
-    if (!url) {
-      return res.status(404).send("Short URL not found");
-    }
-    await redisClient.set(cacheKey,url.full_url,{EX: 86400});
+
     incrementClicksAsync(id);
-    res.redirect(url.full_url);
+    return res.status(200).send(getRedirectTemplate(destinationUrl));
   } catch (err) {
     next(err);
   }

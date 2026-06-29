@@ -1,15 +1,11 @@
 import { generateNanoId } from "../utils/helper.js";
+import { isUrlSafe } from "../utils/urlValidator.js";
 import { saveShortUrl } from "../dao/short-uri.js";
 import shorturl from "../models/shorturl.model.js";
 
 export const createShortUrlServiceWithoutUser = async (url, slug) => {
-  try {
-    const parsed = new URL(url);
-    if (!["http:", "https:"].includes(parsed.protocol)) {
-      throw new Error();
-    }
-  } catch {
-    throw new Error("Invalid destination URL. Must be a valid HTTP or HTTPS address.");
+  if (!isUrlSafe(url)) {
+    throw new Error("Invalid or unsafe destination URL.");
   }
 
   let shortUrl = slug ? slug.trim() : "";
@@ -27,13 +23,8 @@ export const createShortUrlServiceWithoutUser = async (url, slug) => {
 };
 
 export const createShortUrlServiceWithUser = async (url, userId, slug) => {
-  try {
-    const parsed = new URL(url);
-    if (!["http:", "https:"].includes(parsed.protocol)) {
-      throw new Error();
-    }
-  } catch {
-    throw new Error("Invalid destination URL. Must be a valid HTTP or HTTPS address.");
+  if (!isUrlSafe(url)) {
+    throw new Error("Invalid or unsafe destination URL.");
   }
 
   let shortUrl = slug ? slug.trim() : "";
