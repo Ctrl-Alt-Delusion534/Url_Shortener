@@ -2,6 +2,8 @@ import { register, login, checkEmail } from "../services/auth.service.js";
 import { authCookieName, refreshCookieName, cookieOptions, refreshCookieOptions } from "../config/config.js";
 import { signToken, signRefreshToken, verifyRefreshToken } from "../utils/helper.js";
 import { findUserById } from "../dao/user.dao.js";
+import { redisClient } from "../config/redis.js";
+import jsonwebtoken from "jsonwebtoken";
 
 export const registerUser = async (req, res, next) => {
   try {
@@ -33,6 +35,21 @@ export const LoginUser = async (req, res, next) => {
 
 export const logoutUser = async (req, res, next) => {
   try {
+    const token = req.cookies?.[authCookieName];
+    if (token) {
+      try {
+        const decoded = jsonwebtoken.decode(token);
+        if (decoded && decoded.exp) {
+          const remainingTime = decoded.exp - Math.floor(Date.now() / 1000);
+          if (remainingTime > 0) {
+            await redisClient.set(`blacklist:${token}`, "true", {
+              EX: remainingTime,
+            });
+          }
+        }
+      } catch (err) {
+      }
+    }
     res.clearCookie(authCookieName, cookieOptions);
     res.clearCookie(refreshCookieName, refreshCookieOptions);
     res.status(200).json({ message: "Logged out successfully" });
