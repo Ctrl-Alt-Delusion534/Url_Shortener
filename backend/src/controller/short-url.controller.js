@@ -3,6 +3,7 @@ import { findUrlFromShortUrl, findUrlsByUserId, incrementClicksAsync } from "../
 import { redisClient } from "../config/redis.js";
 import { getRedirectTemplate } from "../utils/redirectTemplate.js";
 import { incrementCacheHits, incrementCacheMisses } from "../utils/metrics.js";
+import { queryCppCache } from "../utils/cppCache.js";
 
 export const createShortUrl = async (req, res, next) => {
   try {
@@ -26,8 +27,15 @@ export const createShortUrl = async (req, res, next) => {
 export const redirectfromShortUrl = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const cacheKey = `url:cache:${id}`;
-    let destinationUrl = await redisClient.get(cacheKey);
+    let destinationUrl = "";
+
+    try {
+      const response = await queryCppCache("GET", id);
+      if (response && !response.startsWith("ERR:")) {
+        destinationUrl = response;
+      }
+    } catch (err) {
+    }
 
     if (!destinationUrl) {
       const url = await findUrlFromShortUrl(id);
@@ -35,7 +43,10 @@ export const redirectfromShortUrl = async (req, res, next) => {
         return res.status(404).send("Short URL not found");
       }
       destinationUrl = url.full_url;
-      await redisClient.set(cacheKey, destinationUrl, { EX: 86400 });
+      try {
+        await queryCppCache("SET", id, destinationUrl);
+      } catch (err) {
+      }
       incrementCacheMisses();
     } else {
       incrementCacheHits();
