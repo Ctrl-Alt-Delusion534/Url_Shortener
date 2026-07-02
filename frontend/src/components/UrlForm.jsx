@@ -49,7 +49,7 @@ const UrlForm = ({
       <button
         type="submit"
         disabled={isPending}
-        className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/10 hover:shadow-lg hover:shadow-blue-500/15 hover:brightness-105 active:scale-[0.98] transition-all duration-200 mt-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full rounded-xl bg-slate-900 hover:bg-slate-800 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-200 mt-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isPending ? "Shortening..." : "Shorten URL"}
       </button>

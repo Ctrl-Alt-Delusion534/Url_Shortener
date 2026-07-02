@@ -87,7 +87,7 @@ const LoginPage = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/10 hover:shadow-lg hover:shadow-blue-500/15 hover:brightness-105 active:scale-[0.98] transition-all duration-200 flex items-center justify-center cursor-pointer disabled:opacity-50"
+            className="w-full rounded-xl bg-slate-900 hover:bg-slate-800 py-2.5 text-sm font-semibold text-white transition-all duration-200 flex items-center justify-center cursor-pointer disabled:opacity-50"
           >
             {loading ? (
               <span className="flex h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
@@ -99,7 +99,7 @@ const LoginPage = () => {
 
         <p className="mt-6 text-center text-xs text-slate-500">
           Don't have an account?{" "}
-          <Link to="/register" className="font-semibold text-blue-600 hover:text-blue-700 hover:underline transition-colors">
+          <Link to="/register" className="font-semibold text-slate-900 hover:text-slate-800 hover:underline transition-colors">
             Sign Up
           </Link>
         </p>

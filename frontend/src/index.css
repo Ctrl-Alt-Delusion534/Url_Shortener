@@ -25,11 +25,10 @@
 
 .premium-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(37, 99, 235, 0.15);
+  border-color: rgba(15, 23, 42, 0.12);
   box-shadow: 
-    0 25px 45px -12px rgba(37, 99, 235, 0.06), 
-    0 10px 20px -8px rgba(37, 99, 235, 0.03),
-    0 0 0 1px rgba(37, 99, 235, 0.02);
+    0 25px 45px -12px rgba(0, 0, 0, 0.04), 
+    0 10px 20px -8px rgba(0, 0, 0, 0.02);
 }
 
 .premium-input {
@@ -44,8 +43,8 @@
 
 .premium-input:focus {
   background-color: #ffffff;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+  border-color: #0f172a;
+  box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.05);
 }
 
 @keyframes float-blob {

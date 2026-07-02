@@ -14,14 +14,9 @@ const Navbar = () => {
     <nav className="border-b border-slate-100 bg-white/70 backdrop-blur-md sticky top-0 z-50 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl flex h-16 items-center justify-between">
         <div className="flex items-center">
-          <Link to="/" className="flex items-center gap-2.5 group">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-500/20 transform group-hover:scale-105 transition-all duration-300">
-              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="currentColor"/>
-              </svg>
-            </div>
-            <span className="text-xl font-extrabold text-slate-900 tracking-tight">
-              snap<span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">url</span>
+          <Link to="/" className="flex items-center gap-1 group">
+            <span className="text-xl font-bold text-slate-900 tracking-tight">
+              snap<span className="font-medium text-slate-500">url</span>
             </span>
           </Link>
         </div>
@@ -65,7 +60,7 @@ const Navbar = () => {
               </Link>
               <Link
                 to="/register"
-                className="rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-md shadow-blue-500/10 hover:shadow-lg hover:shadow-blue-500/15 hover:brightness-105 active:scale-95 transition-all duration-200 cursor-pointer"
+                className="rounded-lg bg-slate-900 hover:bg-slate-800 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 cursor-pointer"
               >
                 Sign Up
               </Link>

@@ -50,7 +50,7 @@ const MyUrlsPage = () => {
           </div>
           <button
             onClick={() => navigate({ to: "/" })}
-            className="self-start sm:self-auto rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/10 hover:shadow-lg hover:shadow-blue-500/15 hover:brightness-105 active:scale-95 transition-all duration-200 cursor-pointer"
+            className="self-start sm:self-auto rounded-xl bg-slate-900 hover:bg-slate-800 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-200 cursor-pointer"
           >
             Create New Link
           </button>
@@ -58,7 +58,7 @@ const MyUrlsPage = () => {
 
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div className="rounded-2xl p-6 premium-card relative overflow-hidden group">
-            <div className="absolute top-0 left-0 h-full w-1.5 bg-gradient-to-b from-blue-500 to-blue-600 transition-all group-hover:w-2"></div>
+            <div className="absolute top-0 left-0 h-full w-1.5 bg-slate-700 transition-all group-hover:w-2"></div>
             <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
               Total Links Created
             </p>
@@ -67,7 +67,7 @@ const MyUrlsPage = () => {
             </p>
           </div>
           <div className="rounded-2xl p-6 premium-card relative overflow-hidden group">
-            <div className="absolute top-0 left-0 h-full w-1.5 bg-gradient-to-b from-indigo-500 to-indigo-600 transition-all group-hover:w-2"></div>
+            <div className="absolute top-0 left-0 h-full w-1.5 bg-slate-500 transition-all group-hover:w-2"></div>
             <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
               Total Clicks
             </p>
@@ -80,7 +80,7 @@ const MyUrlsPage = () => {
         <div className="mt-8 rounded-2xl overflow-hidden premium-card">
           {isLoading ? (
             <div className="flex h-40 items-center justify-center">
-              <span className="flex h-6 w-6 animate-spin rounded-full border-2 border-blue-600 border-t-transparent"></span>
+              <span className="flex h-6 w-6 animate-spin rounded-full border-2 border-slate-900 border-t-transparent"></span>
             </div>
           ) : isError ? (
             <div className="flex h-40 items-center justify-center text-sm text-red-500 font-semibold bg-red-50/50">
@@ -91,7 +91,7 @@ const MyUrlsPage = () => {
               <p className="text-sm font-medium text-slate-500">No shortened links yet.</p>
               <button
                 onClick={() => navigate({ to: "/" })}
-                className="mt-2 text-xs font-semibold text-blue-600 hover:text-blue-700 transition-colors cursor-pointer"
+                className="mt-2 text-xs font-semibold text-slate-900 hover:text-slate-800 transition-colors cursor-pointer"
               >
                 Create your first link &rarr;
               </button>
@@ -100,7 +100,7 @@ const MyUrlsPage = () => {
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-gradient-to-r from-blue-600 to-indigo-600 text-xs font-semibold uppercase tracking-wider text-white">
+                  <tr className="bg-slate-900 text-xs font-semibold uppercase tracking-wider text-white">
                     <th className="py-4 px-6 font-semibold">Original URL</th>
                     <th className="py-4 px-6 font-semibold">Short URL</th>
                     <th className="py-4 px-6 text-center font-semibold">Clicks</th>
@@ -128,12 +128,12 @@ const MyUrlsPage = () => {
                             {url.full_url}
                           </a>
                         </td>
-                        <td className="py-4 px-6 font-medium text-blue-600">
+                        <td className="py-4 px-6 font-medium text-slate-900">
                           <a
                             href={fullShortUrl}
                             target="_blank"
                             rel="noreferrer"
-                            className="hover:text-blue-700 hover:underline transition-colors"
+                            className="hover:text-slate-700 hover:underline transition-colors"
                           >
                             {url.short_url}
                           </a>

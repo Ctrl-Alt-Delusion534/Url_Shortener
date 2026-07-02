@@ -45,11 +45,7 @@ const HomePage = () => {
     <div className="min-h-[calc(100vh-4rem)] px-4 py-20 flex items-center justify-center">
       <div className="w-full max-w-[460px] rounded-2xl p-8 sm:p-10 premium-card">
         <div className="text-center">
-          <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-500/20">
-            <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="currentColor"/>
-            </svg>
-          </div>
+
           <h1 className="mt-5 text-2xl font-semibold tracking-tight text-slate-900 font-sans">
             Shorten your link
           </h1>
@@ -60,7 +56,7 @@ const HomePage = () => {
 
         {authLoading ? (
           <div className="flex h-40 items-center justify-center mt-8">
-            <span className="flex h-6 w-6 animate-spin rounded-full border-2 border-blue-600 border-t-transparent"></span>
+            <span className="flex h-6 w-6 animate-spin rounded-full border-2 border-slate-900 border-t-transparent"></span>
           </div>
         ) : !user ? (
           <div className="mt-8 text-center p-6 border border-slate-200/60 rounded-xl bg-slate-50/50">
@@ -70,7 +66,7 @@ const HomePage = () => {
             <div className="mt-6 flex flex-col gap-3">
               <button
                 onClick={() => navigate({ to: "/login" })}
-                className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 py-2.5 text-sm font-semibold text-white shadow hover:brightness-105 active:scale-95 transition-all duration-205 cursor-pointer"
+                className="w-full rounded-xl bg-slate-900 hover:bg-slate-800 py-2.5 text-sm font-semibold text-white transition-all duration-205 cursor-pointer"
               >
                 Sign In
               </button>
@@ -107,7 +103,7 @@ const HomePage = () => {
                   href={mutation.data}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-2 block break-all text-sm font-medium text-blue-600 hover:text-blue-700 hover:underline transition-all"
+                  className="mt-2 block break-all text-sm font-medium text-slate-900 hover:text-slate-800 hover:underline transition-all"
                 >
                   {mutation.data}
                 </a>
